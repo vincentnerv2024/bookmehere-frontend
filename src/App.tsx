@@ -12,6 +12,7 @@ import { UserDashboardPage } from './pages/UserDashboardPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminPage } from './pages/AdminPage';
 import { AdminLoginPage } from './pages/AdminLoginPage';
+import { UserLoginPage } from './pages/UserLoginPage';
 import { ThankYouPage } from './pages/ThankYouPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import './styles/App.css';
@@ -31,7 +32,7 @@ const App: React.FC = () => {
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/booking/:serviceId" element={<BookingPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<UserLoginPage />} />
 
             {/* User dashboard for customers */}
             <Route path="/dashboard" element={<UserDashboardPage />} />

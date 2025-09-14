@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { 
@@ -25,6 +26,7 @@ export const BookingPage: React.FC = () => {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
     email: '',
@@ -46,7 +48,26 @@ export const BookingPage: React.FC = () => {
   useEffect(() => {
     fetchServices();
     fetchBusinessSettings();
+    checkUserLogin();
   }, []);
+
+  const checkUserLogin = async () => {
+    try {
+      const userSession = localStorage.getItem('userSession');
+      if (userSession) {
+        const user = JSON.parse(userSession);
+        setIsUserLoggedIn(true);
+        // Pre-fill customer data for logged-in users
+        setCustomerData(prev => ({
+          ...prev,
+          name: user.username || '',
+          email: user.email || ''
+        }));
+      }
+    } catch (error) {
+      console.error('Error checking user login:', error);
+    }
+  };
 
   useEffect(() => {
     if (serviceId && services.length > 0) {
@@ -352,6 +373,42 @@ export const BookingPage: React.FC = () => {
                 <div className="step-number">4</div>
                 <h2>Your Contact Information</h2>
               </div>
+              
+              {/* Phone Confirmation Notice for Guest Users */}
+              {!isUserLoggedIn && (
+                <div style={{
+                  background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+                  border: '1px solid #f59e0b',
+                  borderRadius: '12px',
+                  padding: '1rem',
+                  marginBottom: '1.5rem',
+                  borderLeft: '4px solid #f59e0b'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>📞</span>
+                    <h4 style={{ margin: 0, color: '#92400e', fontSize: '1.1rem' }}>
+                      Phone Confirmation Required
+                    </h4>
+                  </div>
+                  <p style={{ margin: 0, color: '#92400e', fontSize: '0.9rem', lineHeight: '1.4' }}>
+                    As a guest user, you'll need to confirm your booking via phone call. 
+                    We'll contact you at the number you provide to confirm your appointment.
+                  </p>
+                  <div style={{ marginTop: '0.75rem' }}>
+                    <Link 
+                      to="/login" 
+                      style={{ 
+                        color: '#92400e', 
+                        textDecoration: 'underline',
+                        fontSize: '0.9rem',
+                        fontWeight: '500'
+                      }}
+                    >
+                      Login to manage bookings online →
+                    </Link>
+                  </div>
+                </div>
+              )}
               
               <form onSubmit={handleSubmit} className="customer-form">
                 <div className="form-group">

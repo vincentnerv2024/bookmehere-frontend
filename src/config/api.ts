@@ -42,6 +42,11 @@ export const API_ENDPOINTS = {
   ADMIN_CHECK: '/simple-admin/check',
   ADMIN_LOGOUT: '/simple-admin/logout',
   
+  // User
+  USER_LOGIN: '/simple-admin/user-login',
+  USER_CHECK: '/simple-admin/user-check',
+  USER_LOGOUT: '/simple-admin/logout',
+  
   // Auth
   AUTH_GOOGLE: '/auth/google',
   AUTH_CALLBACK: '/auth/google/callback',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Service, Master, CustomerData } from '../types';
 
@@ -14,6 +14,14 @@ export const ThankYouPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const booking = location.state?.booking as BookingData;
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const userSession = localStorage.getItem('userSession');
+    if (userSession) {
+      setIsUserLoggedIn(true);
+    }
+  }, []);
 
   const handleGoHome = (): void => {
     navigate('/');
@@ -59,9 +67,36 @@ export const ThankYouPage: React.FC = () => {
           </div>
           
           <h1 className="thank-you-title">Thank You!</h1>
-          <p className="thank-you-subtitle">
-            Your booking has been confirmed. We'll contact you soon to finalize the details.
-          </p>
+          {isUserLoggedIn ? (
+            <p className="thank-you-subtitle">
+              Your booking has been confirmed and saved to your account. You can manage it from your dashboard.
+            </p>
+          ) : (
+            <div>
+              <p className="thank-you-subtitle">
+                Your booking request has been submitted successfully!
+              </p>
+              <div style={{
+                background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+                border: '1px solid #f59e0b',
+                borderRadius: '12px',
+                padding: '1rem',
+                margin: '1rem 0',
+                borderLeft: '4px solid #f59e0b'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>📞</span>
+                  <h4 style={{ margin: 0, color: '#92400e', fontSize: '1.1rem' }}>
+                    Phone Confirmation Required
+                  </h4>
+                </div>
+                <p style={{ margin: 0, color: '#92400e', fontSize: '0.9rem', lineHeight: '1.4' }}>
+                  We'll call you at <strong>{booking.customer.phone}</strong> to confirm your appointment. 
+                  Please keep your phone available for our call.
+                </p>
+              </div>
+            </div>
+          )}
 
           <div className="booking-summary">
             <h3>Booking Summary</h3>
