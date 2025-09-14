@@ -9,6 +9,7 @@ import { ServicesPage } from './pages/ServicesPage';
 import { BookingPage } from './pages/BookingPage';
 import { LoginPage } from './pages/LoginPage';
 import { UserDashboardPage } from './pages/UserDashboardPage';
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminPage } from './pages/AdminPage';
 import { AdminLoginPage } from './pages/AdminLoginPage';
@@ -36,6 +37,9 @@ const App: React.FC = () => {
 
             {/* User dashboard for customers */}
             <Route path="/dashboard" element={<UserDashboardPage />} />
+
+            {/* Admin dashboard for managing bookings */}
+            <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
 
             {/* Business dashboard for admins */}
             <Route path="/business" element={

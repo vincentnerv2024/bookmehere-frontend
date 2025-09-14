@@ -12,6 +12,7 @@ export const UserLoginPage: React.FC = () => {
     password: ''
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [loginType, setLoginType] = useState<'user' | 'admin'>('user');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -31,13 +32,21 @@ export const UserLoginPage: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(getApiUrl(API_ENDPOINTS.USER_LOGIN), formData);
+      const endpoint = loginType === 'user' ? API_ENDPOINTS.USER_LOGIN : API_ENDPOINTS.ADMIN_LOGIN;
+      const response = await axios.post(getApiUrl(endpoint), formData);
       
       if (response.data.success) {
         toast.success('Login successful!');
-        // Store user session info
-        localStorage.setItem('userSession', JSON.stringify(response.data.user));
-        navigate('/dashboard');
+        // Store session info
+        const sessionKey = loginType === 'user' ? 'userSession' : 'adminSession';
+        localStorage.setItem(sessionKey, JSON.stringify(response.data.user));
+        
+        // Redirect based on login type
+        if (loginType === 'user') {
+          navigate('/dashboard');
+        } else {
+          navigate('/admin-dashboard');
+        }
       } else {
         toast.error('Login failed');
       }
@@ -54,11 +63,52 @@ export const UserLoginPage: React.FC = () => {
       <div className="booking-card" style={{ maxWidth: '400px', width: '100%' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h1 className="section-title" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
-            User Login
+            Login
           </h1>
           <p className="section-subtitle">
-            Access your bookings and manage your appointments
+            Access your account to manage bookings
           </p>
+        </div>
+
+        {/* Login Type Selection */}
+        <div className="form-group" style={{ marginBottom: '1.5rem' }}>
+          <label className="form-label">Login As</label>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <button
+              type="button"
+              onClick={() => setLoginType('user')}
+              style={{
+                flex: 1,
+                padding: '0.75rem',
+                border: loginType === 'user' ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+                borderRadius: '8px',
+                background: loginType === 'user' ? '#eff6ff' : 'white',
+                color: loginType === 'user' ? '#1d4ed8' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                fontWeight: '500'
+              }}
+            >
+              👤 Customer
+            </button>
+            <button
+              type="button"
+              onClick={() => setLoginType('admin')}
+              style={{
+                flex: 1,
+                padding: '0.75rem',
+                border: loginType === 'admin' ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+                borderRadius: '8px',
+                background: loginType === 'admin' ? '#eff6ff' : 'white',
+                color: loginType === 'admin' ? '#1d4ed8' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                fontWeight: '500'
+              }}
+            >
+              🛠️ Admin
+            </button>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -115,8 +165,19 @@ export const UserLoginPage: React.FC = () => {
             fontSize: '0.875rem',
             color: '#374151'
           }}>
-            <p><strong>Username:</strong> user</p>
-            <p><strong>Password:</strong> user123</p>
+            {loginType === 'user' ? (
+              <>
+                <p><strong>Customer Login:</strong></p>
+                <p><strong>Username:</strong> user</p>
+                <p><strong>Password:</strong> user123</p>
+              </>
+            ) : (
+              <>
+                <p><strong>Admin Login:</strong></p>
+                <p><strong>Username:</strong> admin</p>
+                <p><strong>Password:</strong> admin123</p>
+              </>
+            )}
           </div>
         </div>
 
