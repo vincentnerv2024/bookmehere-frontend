@@ -106,7 +106,7 @@ export const AdminLoginPage: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .admin-login-container {
           display: flex;
           justify-content: center;

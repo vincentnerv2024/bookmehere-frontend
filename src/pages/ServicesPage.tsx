@@ -108,7 +108,7 @@ export const ServicesPage: React.FC = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .loading-state {
           text-align: center;
           padding: 4rem 2rem;

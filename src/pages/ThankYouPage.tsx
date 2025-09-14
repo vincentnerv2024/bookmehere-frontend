@@ -128,7 +128,7 @@ export const ThankYouPage: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .thank-you-container {
           display: flex;
           justify-content: center;

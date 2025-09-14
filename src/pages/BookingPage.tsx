@@ -539,7 +539,7 @@ export const BookingPage: React.FC = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .booking-layout {
           display: grid;
           grid-template-columns: 1fr;
