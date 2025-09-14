@@ -1,19 +1,12 @@
 // API Configuration
 // This file manages API endpoints for different environments
+// Updated: Force HTTPS for production
 
 const getApiBaseUrl = (): string => {
-  // Force HTTP for now to avoid SSL certificate issues
-  const envUrl = import.meta.env.VITE_API_BASE_URL;
-  
-  if (envUrl) {
-    // If environment variable is set, use it but force HTTP
-    return envUrl.replace('https://', 'http://');
-  }
-  
   // Check if we're in production (Netlify)
   if (import.meta.env.PROD) {
-    // Production API URL - use HTTP to avoid SSL issues
-    return 'http://138.197.159.142:3001/api';
+    // Production API URL - use HTTPS with self-signed cert (browser will warn but allow)
+    return 'https://138.197.159.142/api';
   }
   
   // Development API URL
