@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const HomePage: React.FC = () => {
+  console.log('HomePage rendering');
   return (
-    <div className="container">
+    <div className="container" style={{ minHeight: '80vh', padding: '2rem' }}>
       <div className="hero-section" style={{ 
         textAlign: 'center', 
         padding: '4rem 0',
