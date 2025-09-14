@@ -33,7 +33,7 @@ export const ServicesPage: React.FC = () => {
       const response = await axios.get<ApiResponse<Service[]>>(apiUrl);
       console.log('Services response:', response.data);
       setServices(response.data.data || []);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to load services:', err);
       console.error('Error details:', err.response?.data);
       toast.error('Failed to load services');
