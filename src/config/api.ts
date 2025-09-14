@@ -2,14 +2,22 @@
 // This file manages API endpoints for different environments
 
 const getApiBaseUrl = (): string => {
+  // Force HTTP for now to avoid SSL certificate issues
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  
+  if (envUrl) {
+    // If environment variable is set, use it but force HTTP
+    return envUrl.replace('https://', 'http://');
+  }
+  
   // Check if we're in production (Netlify)
   if (import.meta.env.PROD) {
-    // Production API URL - will be set via Netlify environment variables
-    return import.meta.env.VITE_API_BASE_URL || 'https://bookmehere-backend.onrender.com/api';
+    // Production API URL - use HTTP to avoid SSL issues
+    return 'http://138.197.159.142:3001/api';
   }
   
   // Development API URL
-  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+  return 'http://localhost:3001/api';
 };
 
 export const API_CONFIG = {
