@@ -7,15 +7,16 @@ export const HomePage: React.FC = () => {
       <div className="hero-section" style={{ 
         textAlign: 'center', 
         padding: '4rem 0',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #8b5cf6 100%)',
         color: 'white',
-        borderRadius: '12px',
-        marginBottom: '3rem'
+        borderRadius: '16px',
+        marginBottom: '3rem',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
       }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '1rem', fontWeight: '700' }}>
+        <h1 className="hero-title">
           Welcome to BookMeHere
         </h1>
-        <p style={{ fontSize: '1.25rem', marginBottom: '2rem', opacity: '0.9' }}>
+        <p className="hero-subtitle">
           Professional booking system for modern businesses
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -44,17 +45,20 @@ export const HomePage: React.FC = () => {
         gap: '2rem',
         marginBottom: '3rem'
       }}>
-        <div className="card">
-          <h3>🎯 Easy Booking</h3>
-          <p>Book appointments in just a few clicks with our intuitive interface.</p>
+        <div className="booking-card">
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎯</div>
+          <h3 style={{ color: '#1f2937', fontSize: '1.5rem', marginBottom: '1rem' }}>Easy Booking</h3>
+          <p style={{ color: '#6b7280', lineHeight: '1.6' }}>Book appointments in just a few clicks with our intuitive interface.</p>
         </div>
-        <div className="card">
-          <h3>👨‍💼 Expert Masters</h3>
-          <p>Choose from our team of professional masters with verified skills.</p>
+        <div className="booking-card">
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👨‍💼</div>
+          <h3 style={{ color: '#1f2937', fontSize: '1.5rem', marginBottom: '1rem' }}>Expert Masters</h3>
+          <p style={{ color: '#6b7280', lineHeight: '1.6' }}>Choose from our team of professional masters with verified skills.</p>
         </div>
-        <div className="card">
-          <h3>📱 Mobile Friendly</h3>
-          <p>Access and book from any device with our responsive design.</p>
+        <div className="booking-card">
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📱</div>
+          <h3 style={{ color: '#1f2937', fontSize: '1.5rem', marginBottom: '1rem' }}>Mobile Friendly</h3>
+          <p style={{ color: '#6b7280', lineHeight: '1.6' }}>Access and book from any device with our responsive design.</p>
         </div>
       </div>
     </div>

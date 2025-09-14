@@ -12,11 +12,28 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-gray-900">
+    <header style={{ 
+      background: 'rgba(255, 255, 255, 0.95)', 
+      backdropFilter: 'blur(10px)',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000
+    }}>
+      <div className="container" style={{ padding: '0 2rem' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          height: '4rem' 
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Link to="/" style={{ 
+              fontSize: '1.5rem', 
+              fontWeight: '700', 
+              color: '#1f2937',
+              textDecoration: 'none'
+            }}>
               BookMeHere
             </Link>
           </div>

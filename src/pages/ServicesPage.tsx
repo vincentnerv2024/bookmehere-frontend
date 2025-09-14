@@ -63,19 +63,17 @@ export const ServicesPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="container">
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Loading services...</p>
-        </div>
+      <div className="loading-overlay">
+        <div className="loading-spinner"></div>
+        <div className="loading-text">Loading services...</div>
       </div>
     );
   }
 
   return (
     <div className="container">
-      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Our Services</h1>
-      <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '3rem' }}>
+      <h1 className="section-title">Our Services</h1>
+      <p className="section-subtitle">
         Professional services tailored to your needs
       </p>
 
