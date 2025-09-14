@@ -46,7 +46,10 @@ export const BookingPage: React.FC = () => {
   useEffect(() => {
     fetchServices();
     fetchBusinessSettings();
-    if (serviceId) {
+  }, []);
+
+  useEffect(() => {
+    if (serviceId && services.length > 0) {
       // Pre-select service if coming from service page
       const service = services.find(s => s.id === parseInt(serviceId));
       if (service) {
