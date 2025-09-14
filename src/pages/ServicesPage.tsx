@@ -29,6 +29,11 @@ export const ServicesPage: React.FC = () => {
     try {
       setLoading(true);
       const apiUrl = getApiUrl(API_ENDPOINTS.SERVICES);
+      console.log('Environment variables:', {
+        VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+        PROD: import.meta.env.PROD,
+        MODE: import.meta.env.MODE
+      });
       console.log('Fetching services from:', apiUrl);
       const response = await axios.get<ApiResponse<Service[]>>(apiUrl);
       console.log('Services response:', response.data);
@@ -36,6 +41,7 @@ export const ServicesPage: React.FC = () => {
     } catch (err: any) {
       console.error('Failed to load services:', err);
       console.error('Error details:', err.response?.data);
+      console.error('Full error:', err);
       toast.error('Failed to load services');
     } finally {
       setLoading(false);
