@@ -28,10 +28,14 @@ export const ServicesPage: React.FC = () => {
   const fetchServices = async (): Promise<void> => {
     try {
       setLoading(true);
-      const response = await axios.get<ApiResponse<Service[]>>(getApiUrl(API_ENDPOINTS.SERVICES));
+      const apiUrl = getApiUrl(API_ENDPOINTS.SERVICES);
+      console.log('Fetching services from:', apiUrl);
+      const response = await axios.get<ApiResponse<Service[]>>(apiUrl);
+      console.log('Services response:', response.data);
       setServices(response.data.data || []);
     } catch (err) {
       console.error('Failed to load services:', err);
+      console.error('Error details:', err.response?.data);
       toast.error('Failed to load services');
     } finally {
       setLoading(false);
