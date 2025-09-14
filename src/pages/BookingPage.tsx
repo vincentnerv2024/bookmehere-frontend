@@ -201,7 +201,7 @@ export const BookingPage: React.FC = () => {
         {/* Main Booking Flow */}
         <div className="booking-main">
           {/* Step 1: Service Selection */}
-          <div className="card booking-step">
+          <div className="booking-card booking-step">
             <div className="step-header">
               <div className="step-number">1</div>
               <h2>Choose Your Service</h2>
@@ -236,7 +236,7 @@ export const BookingPage: React.FC = () => {
 
           {/* Step 2: Master Selection */}
           {selectedService && (
-            <div className="card booking-step">
+            <div className="booking-card booking-step">
               <div className="step-header">
                 <div className="step-number">2</div>
                 <h2>Choose Your Master</h2>
@@ -289,7 +289,7 @@ export const BookingPage: React.FC = () => {
 
           {/* Step 3: Date & Time Selection */}
           {selectedMaster && (
-            <div className="card booking-step">
+            <div className="booking-card booking-step">
               <div className="step-header">
                 <div className="step-number">3</div>
                 <h2>Select Date & Time</h2>
@@ -344,7 +344,7 @@ export const BookingPage: React.FC = () => {
 
           {/* Step 4: Customer Information */}
           {selectedTime && (
-            <div className="card booking-step">
+            <div className="booking-card booking-step">
               <div className="step-header">
                 <div className="step-number">4</div>
                 <h2>Your Contact Information</h2>
@@ -500,7 +500,7 @@ export const BookingPage: React.FC = () => {
               <div className="summary-item">
                 <h4>Appointment Details:</h4>
                 {selectedDate && (
-                  <p><strong>Date:</strong> {new Date(selectedDate).toLocaleDateString()}</p>
+                  <p><strong>Date:</strong> {selectedDate}</p>
                 )}
                 {selectedTime && (
                   <p><strong>Time:</strong> {selectedTime}</p>
@@ -529,7 +529,7 @@ export const BookingPage: React.FC = () => {
             <div className="mobile-summary-details">
               <span className="mobile-service">{selectedService.name}</span>
               {selectedMaster && <span className="mobile-master">• {selectedMaster.name}</span>}
-              {selectedDate && <span className="mobile-date">• {new Date(selectedDate).toLocaleDateString()}</span>}
+              {selectedDate && <span className="mobile-date">• {selectedDate}</span>}
               {selectedTime && <span className="mobile-time">• {selectedTime}</span>}
             </div>
             <div className="mobile-total">
